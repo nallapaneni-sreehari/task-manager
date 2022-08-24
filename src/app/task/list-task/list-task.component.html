@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">
+            Tasks List
+        </h3>
+    </div>
+</div>
+
+<div class="row" *ngIf="gloalData.tasks?.length<=0">
+    <h5 class="text-center mt-5">
+        No Tasks are Created yet...!
+    </h5>
+    <!-- <img class="text-center" style="height: 50%;width:50%;" src="https://i.pinimg.com/originals/49/e5/8d/49e58d5922019b8ec4642a2e2b9291c2.png" alt="data not found"> -->
+</div>
+<div class="row" *ngFor="let task of gloalData.tasks">
+    <div class="col-md-12 mb-2">
+        <mat-card [style.background-color]="task.cardColor">
+            <mat-card-subtitle class="position-absolute top-0 start-10 text-center"
+                style="font-size: 12px; background-color: #181515; border-radius: 0px 0px 10px 10px; color: white; width: 20%;">
+                {{task.tCreatedAt | date:'short'}}
+            </mat-card-subtitle>
+            <br>
+
+            <mat-card-subtitle *ngIf="task.pinned" class="position-absolute top-0 start-50 text-center"
+                style="font-size: 20px; background-color: #ffffff; border-radius: 0px 0px 10px 10px;">
+                <i class="bi bi-pin-fill"></i>
+            </mat-card-subtitle>
+
+            <mat-card-subtitle><strong style="font-size: 14px; text-decoration: solid;">{{task.tName}}</strong>
+            </mat-card-subtitle>
+
+            <mat-card-subtitle><b>{{task.tDesc}}</b></mat-card-subtitle>
+
+            <!-- <div>
+                <button mat-button class="position-absolute top-0 end-0"
+                    style="background-color: rgba(238, 104, 104, 0.411);">X</button>
+
+                <button mat-button class="position-absolute bottom-0 end-0"
+                    style="background-color: rgba(142, 206, 236, 0.801);">X</button>
+            </div> -->
+            <div class="position-absolute top-0 end-0">
+                <i class="bi bi-pin-angle-fill ic" (click)="taskAction('pin',task)"></i>
+                &nbsp;
+                <i class="bi bi-pencil-square ic" (click)="taskAction('edit',task)"></i>
+                &nbsp;
+                <i class="bi bi-trash ic" (click)="taskAction('delete',task)"></i>
+                &nbsp;
+                <!-- <button mat-button><i class="bi bi-pencil-square"></i></button>
+                &nbsp;
+                <button mat-button><i class="bi bi-trash"></i></button> -->
+            </div>
+        </mat-card>
+    </div>
+</div>
